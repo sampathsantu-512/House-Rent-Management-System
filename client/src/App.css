@@ -1,0 +1,44 @@
+:root {
+  --brand: #2f7d42;
+  --brand-soft: #ecf7ed;
+}
+
+body {
+  background-color: #f8faf7;
+}
+
+main {
+  min-height: calc(100vh - 72px);
+}
+
+.navbar {
+  background-color: #ffffff !important;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+.card-title {
+  color: var(--brand);
+}
+
+.btn-success {
+  background-color: var(--brand);
+  border-color: var(--brand);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #255e34;
+  border-color: #255e34;
+}
+
+.form-control:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 0.2rem rgba(47, 125, 66, 0.18);
+}
+
+.hero-banner {
+  background-color: var(--brand-soft);
+}
