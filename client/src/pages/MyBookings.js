@@ -39,7 +39,7 @@ const MyBookings = () => {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `https://homehaven-house-rent-management-system.onrender.com//api/bookings/${bookingId}`,
+        `https://homehaven-house-rent-management-system.onrender.com/api/bookings/${bookingId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
