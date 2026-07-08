@@ -12,11 +12,14 @@ const Register = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("https://homehaven-house-rent-management-system.onrender.comapi/auth/register", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://homehaven-house-rent-management-system.onrender.com/api/auth/register",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       const token = response.data.token;
       localStorage.setItem("token", token);
@@ -25,7 +28,10 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       const message =
-        error.response?.data?.message || error.message || "Registration failed.";
+        error.response?.data?.message ||
+        error.message ||
+        "Registration failed.";
+
       alert(message);
     }
   };
@@ -36,13 +42,20 @@ const Register = () => {
         <div className="col-12 col-md-8 col-lg-6">
           <div className="card shadow-sm border-success">
             <div className="card-body p-4">
-              <h2 className="card-title mb-3 text-success">Create Account</h2>
-              <p className="text-muted mb-4">Register to start adding and tracking rental properties.</p>
+              <h2 className="card-title mb-3 text-success">
+                Create Account
+              </h2>
+
+              <p className="text-muted mb-4">
+                Register to start adding and tracking rental properties.
+              </p>
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Full Name
                   </label>
+
                   <input
                     type="text"
                     id="name"
@@ -52,10 +65,12 @@ const Register = () => {
                     required
                   />
                 </div>
+
                 <div className="mb-3">
                   <label htmlFor="email" className="form-label">
-                    Email address
+                    Email Address
                   </label>
+
                   <input
                     type="email"
                     id="email"
@@ -65,10 +80,12 @@ const Register = () => {
                     required
                   />
                 </div>
+
                 <div className="mb-4">
                   <label htmlFor="password" className="form-label">
                     Password
                   </label>
+
                   <input
                     type="password"
                     id="password"
@@ -78,6 +95,7 @@ const Register = () => {
                     required
                   />
                 </div>
+
                 <button type="submit" className="btn btn-success w-100">
                   Register
                 </button>
