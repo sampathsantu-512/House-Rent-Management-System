@@ -19,14 +19,6 @@ const PropertyCard = ({ property }) => {
     status: property.status || "Pending",
   });
 
-  const handleEdit = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -49,17 +41,7 @@ const PropertyCard = ({ property }) => {
 
       await axios.put(
         `https://homehaven-house-rent-management-system.onrender.com/api/properties/${propertyId}`,
-        {
-          title: formData.title,
-          description: formData.description,
-          location: formData.location,
-          price: formData.price,
-          bedrooms: formData.bedrooms,
-          bathrooms: formData.bathrooms,
-          image: formData.image,
-          type: formData.type,
-          status: formData.status,
-        },
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -100,30 +82,37 @@ const PropertyCard = ({ property }) => {
 
   return (
     <>
-      <div className="card h-100 shadow-sm border-0">
+      <div className="card border-0 shadow rounded-4 h-100">
+
         <img
           src={property.image}
-          className="card-img-top"
           alt={property.title}
-          style={{ height: 220, objectFit: "cover" }}
+          className="card-img-top"
+          style={{
+            height: "230px",
+            objectFit: "cover",
+          }}
         />
 
-        <div className="card-body">
-          <h5 className="text-success">{property.title}</h5>
+        <div className="card-body d-flex flex-column">
 
-          <p className="text-muted">{property.location}</p>
+          <h5 className="fw-bold text-success">
+            {property.title}
+          </h5>
 
-          <p className="fw-bold">
-            ₹{property.price}/month
+          <p className="text-muted mb-2">
+            {property.location}
           </p>
 
-          <p>
-            <strong>Type:</strong>{" "}
+          <h5 className="fw-bold">
+            ₹{property.price}/month
+          </h5>
+
+          <p className="mb-2">
             {property.type || "Apartment"}
           </p>
 
           <p>
-            <strong>Status:</strong>{" "}
             <span
               className={`badge ${
                 property.status === "Approved"
@@ -135,133 +124,187 @@ const PropertyCard = ({ property }) => {
             </span>
           </p>
 
-          <p>{property.description}</p>
+          <p className="text-muted flex-grow-1">
+            {property.description}
+          </p>
+
         </div>
 
-        <div className="card-footer bg-white d-flex gap-2">
-          <button
-            className="btn btn-outline-success btn-sm"
-            onClick={() => navigate(`/property/${property._id}`)}
-          >
-            View Details
-          </button>
+        <div className="card-footer bg-white border-0">
 
-          <button
-            className="btn btn-outline-warning btn-sm"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
+          <div className="d-grid gap-2">
 
-          <button
-            className="btn btn-outline-danger btn-sm"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
+            <button
+              className="btn btn-success"
+              onClick={() => navigate(`/property/${property._id}`)}
+            >
+              View Details
+            </button>
+
+            <div className="row g-2">
+
+              <div className="col-6">
+
+                <button
+                  className="btn btn-outline-warning w-100"
+                  onClick={() => setShowModal(true)}
+                >
+                  Edit
+                </button>
+
+              </div>
+
+              <div className="col-6">
+
+                <button
+                  className="btn btn-outline-danger w-100"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
 
       {showModal && (
         <div
           className="modal d-block"
-          style={{ background: "rgba(0,0,0,.5)" }}
-          onClick={handleCloseModal}
+          style={{ background: "rgba(0,0,0,0.6)" }}
+          onClick={() => setShowModal(false)}
         >
           <div
-            className="modal-dialog"
+            className="modal-dialog modal-dialog-centered modal-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-content">
+            <div className="modal-content rounded-4">
 
               <div className="modal-header">
-                <h5>Edit Property</h5>
+
+                <h4 className="text-success">
+                  Edit Property
+                </h4>
 
                 <button
                   className="btn-close"
-                  onClick={handleCloseModal}
+                  onClick={() => setShowModal(false)}
                 ></button>
+
               </div>
 
               <div className="modal-body">
 
-                <input
-                  className="form-control mb-3"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
-                  placeholder="Title"
-                />
+                <div className="row">
 
-                <input
-                  className="form-control mb-3"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  placeholder="Location"
-                />
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
+                      placeholder="Title"
+                    />
+                  </div>
 
-                <input
-                  className="form-control mb-3"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  placeholder="Price"
-                />
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                      placeholder="Location"
+                    />
+                  </div>
 
-                <input
-                  className="form-control mb-3"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleInputChange}
-                  placeholder="Image URL"
-                />
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleInputChange}
+                      placeholder="Price"
+                    />
+                  </div>
 
-                <input
-                  className="form-control mb-3"
-                  name="bedrooms"
-                  value={formData.bedrooms}
-                  onChange={handleInputChange}
-                  placeholder="Bedrooms"
-                />
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="image"
+                      value={formData.image}
+                      onChange={handleInputChange}
+                      placeholder="Image URL"
+                    />
+                  </div>
 
-                <input
-                  className="form-control mb-3"
-                  name="bathrooms"
-                  value={formData.bathrooms}
-                  onChange={handleInputChange}
-                  placeholder="Bathrooms"
-                />
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="bedrooms"
+                      value={formData.bedrooms}
+                      onChange={handleInputChange}
+                      placeholder="Bedrooms"
+                    />
+                  </div>
 
-                <select
-                  className="form-select mb-3"
-                  name="type"
-                  value={formData.type}
-                  onChange={handleInputChange}
-                >
-                  <option>Apartment</option>
-                  <option>Villa</option>
-                  <option>House</option>
-                  <option>PG</option>
-                </select>
+                  <div className="col-md-6 mb-3">
+                    <input
+                      className="form-control form-control-lg"
+                      name="bathrooms"
+                      value={formData.bathrooms}
+                      onChange={handleInputChange}
+                      placeholder="Bathrooms"
+                    />
+                  </div>
 
-                <select
-                  className="form-select mb-3"
-                  name="status"
-                  value={formData.status}
-                  onChange={handleInputChange}
-                >
-                  <option>Pending</option>
-                  <option>Approved</option>
-                </select>
+                  <div className="col-md-6 mb-3">
 
-                <textarea
-                  className="form-control"
-                  rows="4"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                />
+                    <select
+                      className="form-select form-select-lg"
+                      name="type"
+                      value={formData.type}
+                      onChange={handleInputChange}
+                    >
+                      <option>Apartment</option>
+                      <option>Villa</option>
+                      <option>House</option>
+                      <option>PG</option>
+                    </select>
+
+                  </div>
+
+                  <div className="col-md-6 mb-3">
+
+                    <select
+                      className="form-select form-select-lg"
+                      name="status"
+                      value={formData.status}
+                      onChange={handleInputChange}
+                    >
+                      <option>Pending</option>
+                      <option>Approved</option>
+                    </select>
+
+                  </div>
+
+                  <div className="col-12">
+
+                    <textarea
+                      rows="5"
+                      className="form-control"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                    />
+
+                  </div>
+
+                </div>
 
               </div>
 
@@ -269,7 +312,7 @@ const PropertyCard = ({ property }) => {
 
                 <button
                   className="btn btn-secondary"
-                  onClick={handleCloseModal}
+                  onClick={() => setShowModal(false)}
                 >
                   Cancel
                 </button>

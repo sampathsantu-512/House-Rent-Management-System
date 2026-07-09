@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -28,9 +28,6 @@ const PropertyDetails = () => {
     fetchPropertyDetails();
   }, [id]);
 
-  // ==========================
-  // BOOK PROPERTY FUNCTION
-  // ==========================
   const handleBooking = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -61,7 +58,11 @@ const PropertyDetails = () => {
   if (loading) {
     return (
       <div className="container py-5 text-center">
-        <h4>Loading...</h4>
+        <div
+          className="spinner-border text-success mb-3"
+          role="status"
+        ></div>
+        <h5>Loading Property...</h5>
       </div>
     );
   }
@@ -69,7 +70,7 @@ const PropertyDetails = () => {
   if (error || !property) {
     return (
       <div className="container py-5">
-        <div className="alert alert-danger">
+        <div className="alert alert-danger text-center">
           Property not found.
         </div>
       </div>
@@ -77,80 +78,95 @@ const PropertyDetails = () => {
   }
 
   return (
-    <div className="container py-5">
-      <div className="row">
+    <div className="container py-4 py-md-5">
+      <div className="row g-4">
 
-        <div className="col-lg-8">
-          <div className="card shadow">
+        {/* Left Section */}
+        <div className="col-12 col-lg-8">
+
+          <div className="card border-0 shadow rounded-4 overflow-hidden">
 
             <img
               src={property.image}
               alt={property.title}
-              className="card-img-top"
+              className="img-fluid"
               style={{
+                width: "100%",
                 height: "400px",
                 objectFit: "cover",
               }}
             />
 
-            <div className="card-body">
+            <div className="card-body p-4">
 
-              <h2 className="text-success">
+              <h2 className="fw-bold text-success mb-3">
                 {property.title}
               </h2>
 
-              <h5 className="mt-3">
+              <h3 className="fw-bold mb-3">
                 ₹ {property.price}
-              </h5>
+                <small className="text-muted fs-6">
+                  {" "}
+                  / month
+                </small>
+              </h3>
 
-              <p>
-                <strong>Location :</strong>{" "}
-                {property.location}
+              <p className="mb-2">
+                <strong>Location:</strong> {property.location}
               </p>
 
-              <p>
-                <strong>Description :</strong>{" "}
+              <p className="mb-3">
+                <strong>Bedrooms:</strong> {property.bedrooms}
+              </p>
+
+              <p className="mb-3">
+                <strong>Bathrooms:</strong> {property.bathrooms}
+              </p>
+
+              <hr />
+
+              <h5>Description</h5>
+
+              <p className="text-muted">
                 {property.description}
               </p>
 
             </div>
 
           </div>
+
         </div>
 
-        <div className="col-lg-4">
+        {/* Right Section */}
+        <div className="col-12 col-lg-4">
 
-          <div className="card shadow">
+          <div
+            className="card border-0 shadow rounded-4"
+            style={{
+              position: "sticky",
+              top: "90px",
+            }}
+          >
 
-            <div className="card-body">
+            <div className="card-body p-4">
 
               <h4 className="text-success mb-4">
-                Property Details
+                Booking
               </h4>
 
-              <p>
-                <strong>Bedrooms :</strong>{" "}
-                {property.bedrooms}
-              </p>
-
-              <p>
-                <strong>Bathrooms :</strong>{" "}
-                {property.bathrooms}
-              </p>
-
               <button
-                className="btn btn-success w-100 mb-3"
+                className="btn btn-success w-100 mb-3 py-2"
                 onClick={handleBooking}
               >
                 Book Property
               </button>
 
-              <a
-                href="/"
-                className="btn btn-secondary w-100"
+              <Link
+                to="/"
+                className="btn btn-outline-secondary w-100 py-2"
               >
                 Back to Home
-              </a>
+              </Link>
 
             </div>
 

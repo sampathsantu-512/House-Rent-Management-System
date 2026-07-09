@@ -13,7 +13,9 @@ const Home = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("https://homehaven-house-rent-management-system.onrender.com/api/properties");
+        const response = await axios.get(
+          "https://homehaven-house-rent-management-system.onrender.com/api/properties"
+        );
         setProperties(response.data);
       } catch (err) {
         setError("Unable to load properties.");
@@ -39,31 +41,33 @@ const Home = () => {
   });
 
   return (
-    <div className="container py-5">
+    <div className="container py-4 py-md-5">
 
+      {/* Hero Section */}
       <section className="text-center mb-5">
-        <h1 className="display-5 fw-bold text-success">
-          HouseRent
+        <h1 className="display-4 fw-bold text-success">
+          HomeHaven
         </h1>
 
-        <p className="lead text-muted">
-          Find your dream rental home.
+        <p className="lead text-muted px-3">
+          Find your dream rental home with comfort and ease.
         </p>
       </section>
 
-      <div className="row mb-4">
+      {/* Search & Filters */}
+      <div className="row g-3 mb-4">
 
-        <div className="col-md-4">
+        <div className="col-12 col-md-4">
           <input
             type="text"
             className="form-control"
-            placeholder="Search Location / Title"
+            placeholder="Search by Title or Location"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
 
-        <div className="col-md-4">
+        <div className="col-12 col-md-4">
           <input
             type="number"
             className="form-control"
@@ -73,7 +77,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="col-md-4">
+        <div className="col-12 col-md-4">
           <select
             className="form-select"
             value={bedroomFilter}
@@ -89,22 +93,24 @@ const Home = () => {
 
       </div>
 
+      {/* Error Message */}
       {error && (
-        <div className="alert alert-danger">
+        <div className="alert alert-danger text-center">
           {error}
         </div>
       )}
 
+      {/* Property Cards */}
       <div className="row">
 
         {filteredProperties.length === 0 ? (
-          <h4 className="text-center mt-5">
-            No Properties Found
-          </h4>
+          <div className="text-center mt-5">
+            <h4>No Properties Found</h4>
+          </div>
         ) : (
           filteredProperties.map((property) => (
             <div
-              className="col-lg-4 col-md-6 mb-4"
+              className="col-12 col-sm-6 col-lg-4 mb-4"
               key={property._id}
             >
               <PropertyCard property={property} />

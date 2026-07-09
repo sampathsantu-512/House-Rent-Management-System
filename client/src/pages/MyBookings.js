@@ -57,54 +57,88 @@ const MyBookings = () => {
   };
 
   return (
-    <div className="container py-5">
-      <h2 className="text-success mb-4">My Bookings</h2>
+    <div className="container py-4 py-md-5">
+
+      <div className="text-center mb-5">
+        <h2 className="fw-bold text-success">
+          My Bookings
+        </h2>
+
+        <p className="text-muted">
+          View and manage all your booked properties.
+        </p>
+      </div>
 
       {bookings.length === 0 ? (
-        <h5>No bookings found.</h5>
+
+        <div className="text-center py-5">
+          <h4>No bookings found.</h4>
+        </div>
+
       ) : (
+
         <div className="row">
+
           {bookings.map((booking) => (
-            <div className="col-md-4 mb-4" key={booking._id}>
-              <div className="card shadow-sm h-100">
+
+            <div
+              className="col-12 col-sm-6 col-lg-4 mb-4"
+              key={booking._id}
+            >
+
+              <div className="card border-0 shadow rounded-4 h-100">
+
                 <img
                   src={booking.property.image}
                   className="card-img-top"
                   alt={booking.property.title}
-                  style={{ height: "220px", objectFit: "cover" }}
+                  style={{
+                    height: "220px",
+                    objectFit: "cover",
+                  }}
                 />
 
-                <div className="card-body">
-                  <h5>{booking.property.title}</h5>
+                <div className="card-body d-flex flex-column">
 
-                  <p>
-                    <strong>Location:</strong>{" "}
+                  <h5 className="fw-bold">
+                    {booking.property.title}
+                  </h5>
+
+                  <p className="text-muted mb-2">
                     {booking.property.location}
                   </p>
 
-                  <p>
-                    <strong>Price:</strong> ₹{booking.property.price}
+                  <p className="mb-2">
+                    <strong>Price:</strong> ₹
+                    {booking.property.price}/month
                   </p>
 
-                  <p>
+                  <p className="mb-3">
                     <strong>Status:</strong>{" "}
-                    <span className="text-success">
-                      {booking.status}
+                    <span className="badge bg-success">
+                      {booking.status || "Booked"}
                     </span>
                   </p>
 
                   <button
-                    className="btn btn-danger w-100 mt-3"
+                    className="btn btn-danger mt-auto w-100"
                     onClick={() => handleDelete(booking._id)}
                   >
                     Cancel Booking
                   </button>
+
                 </div>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
+
       )}
+
     </div>
   );
 };

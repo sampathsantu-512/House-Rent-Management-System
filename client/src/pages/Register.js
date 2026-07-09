@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -37,29 +38,38 @@ const Register = () => {
   };
 
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-12 col-md-8 col-lg-6">
-          <div className="card shadow-sm border-success">
-            <div className="card-body p-4">
-              <h2 className="card-title mb-3 text-success">
-                Create Account
-              </h2>
+    <div className="container py-4 py-md-5">
+      <div className="row justify-content-center align-items-center">
 
-              <p className="text-muted mb-4">
-                Register to start adding and tracking rental properties.
-              </p>
+        <div className="col-12 col-sm-10 col-md-8 col-lg-5">
+
+          <div className="card border-0 shadow rounded-4">
+
+            <div className="card-body p-4 p-md-5">
+
+              <div className="text-center mb-4">
+
+                <h2 className="fw-bold text-success">
+                  Create Account
+                </h2>
+
+                <p className="text-muted mb-0">
+                  Join HomeHaven and find your perfect rental home.
+                </p>
+
+              </div>
 
               <form onSubmit={handleSubmit}>
+
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
+                  <label className="form-label fw-semibold">
                     Full Name
                   </label>
 
                   <input
                     type="text"
-                    id="name"
                     className="form-control"
+                    placeholder="Enter your full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -67,14 +77,14 @@ const Register = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
+                  <label className="form-label fw-semibold">
                     Email Address
                   </label>
 
                   <input
                     type="email"
-                    id="email"
                     className="form-control"
+                    placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
@@ -82,27 +92,47 @@ const Register = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="password" className="form-label">
+                  <label className="form-label fw-semibold">
                     Password
                   </label>
 
                   <input
                     type="password"
-                    id="password"
                     className="form-control"
+                    placeholder="Create a password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
 
-                <button type="submit" className="btn btn-success w-100">
-                  Register
+                <button
+                  type="submit"
+                  className="btn btn-success btn-lg w-100"
+                >
+                  Create Account
                 </button>
+
               </form>
+
+              <hr className="my-4" />
+
+              <p className="text-center mb-0">
+                Already have an account?{" "}
+                <Link
+                  to="/login"
+                  className="text-success fw-bold text-decoration-none"
+                >
+                  Login
+                </Link>
+              </p>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
     </div>
   );
