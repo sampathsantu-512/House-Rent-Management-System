@@ -14,7 +14,9 @@ const PropertyCard = ({ property }) => {
   return (
     <div
       className="card border-0 mx-auto"
+      onClick={() => navigate(`/property/${property._id}`)}
       style={{
+        cursor: "pointer",
         background: "#1f2937",
         borderRadius: "12px",
         overflow: "hidden",
@@ -130,7 +132,7 @@ const PropertyCard = ({ property }) => {
         <button
           className="btn w-100"
           disabled={!available}
-          onClick={() => navigate(`/property/${property._id}`)}
+          // onClick={() => navigate(`/property/${property._id}`)}
           style={{
             background: "#289545",
             color: "white",
