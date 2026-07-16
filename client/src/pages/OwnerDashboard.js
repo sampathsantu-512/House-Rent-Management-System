@@ -290,7 +290,7 @@ const OwnerDashboard = () => {
           </span>
 
           <button
-            className="logout-btn btn-danger"
+            className="logout-btn"
             onClick={handleLogout}
           >
             Log Out
