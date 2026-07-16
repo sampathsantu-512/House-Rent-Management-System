@@ -37,10 +37,11 @@ const OwnerDashboard = () => {
     status: "Available",
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchProperties();
     fetchBookings();
-  }, [fetchProperties, fetchBookings]);
+  }, []);
 
   // Load Owner Bookings
   const fetchBookings = async () => {
