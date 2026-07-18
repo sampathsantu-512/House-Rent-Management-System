@@ -221,16 +221,12 @@ npm start
 
 This project was collaboratively developed by the following team members.
 
-| Name |GitHub | LinkedIn |
-|------|-------|----------|
+| Name | GitHub | LinkedIn |
+|------|--------|----------|
 | Pechetti Sravya | https://github.com/Sravya239 | https://www.linkedin.com/in/sravya-pechetti-231650323/ |
-
 | Chennu Gowri Lasya Priya | https://github.com/chennulasyapriya-del | https://www.linkedin.com/in/chennu-gowri-lasya-priya-00437b315/ |
-
-| Tumpati Jaswitha| https://github.com/kondalajaswi-sudo | https://www.linkedin.com/in/jaswitha-thumpati-23094a366/ |
-
+| Tumpati Jaswitha | https://github.com/kondalajaswi-sudo | https://www.linkedin.com/in/jaswitha-thumpati-23094a366/ |
 | Botcha Karishma | https://github.com/karishma903 | https://www.linkedin.com/in/botcha-karishma-360531348/ |
-
 | Sampad Kumar Nayak | https://github.com/sampathsantu-512 | https://www.linkedin.com/in/sampad-kumar-nayak-01a743320/ |
 
 
